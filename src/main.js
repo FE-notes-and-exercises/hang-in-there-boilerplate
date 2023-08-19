@@ -110,10 +110,18 @@ window.onload = getRandomPoster;
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
+function Poster(fimage, ftitle, fquote) {
+  this.image = fimage;
+  this.title = ftitle;
+  this.quote = fquote;
+}
 function getRandomPoster() {
   var newImage = images[getRandomIndex(images)]
-  document.querySelector('.poster-img').src = newImage
+  var newTitle = titles[getRandomIndex(titles)]
+  var newQuote = quotes[getRandomIndex(quotes)]
+  currentPoster = new Poster(newImage, newTitle, newQuote)
+  
+  document.querySelector('.poster-img').src = currentPoster.image
 }
 
 
