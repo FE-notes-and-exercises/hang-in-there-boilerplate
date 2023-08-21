@@ -105,27 +105,39 @@ var currentPoster;
 // event listeners go here 👇
 window.onload = getRandomPoster;
 document.querySelector('.show-random').addEventListener('click', getRandomPoster)
+document.querySelector('.show-form').addEventListener('click', handlePageNavigation)
+document.querySelector('.show-main').addEventListener('click', handlePageNavigation)
+document.querySelector('.show-saved').addEventListener('click', handlePageNavigation)
+
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function Poster(fimage, ftitle, fquote) {
-  this.image = fimage;
-  this.title = ftitle;
-  this.quote = fquote;
+function createPoster(imageURL, title, quote) {
+  return {
+    id: Date.now(), 
+    imageURL: imageURL, 
+    title: title, 
+    quote: quote}
 }
 
 function getRandomPoster() {
   var newImage = images[getRandomIndex(images)]
   var newTitle = titles[getRandomIndex(titles)]
   var newQuote = quotes[getRandomIndex(quotes)]
-  currentPoster = new Poster(newImage, newTitle, newQuote)
+  currentPoster = createPoster(newImage, newTitle, newQuote)
   
-  document.querySelector('.poster-img').src = currentPoster.image
+  document.querySelector('.poster-img').src = currentPoster.imageURL
+  document.querySelector('.poster-title').innerText = currentPoster.title
+  document.querySelector('.poster-quote').innerText = currentPoster.quote
 }
 
-
-
+function handlePageNavigation(event) {
+  document.querySelector('.main-poster').classList.toggle('hidden')
+  document.querySelector('.poster-form').classList.toggle('hidden')
+  // document.querySelector('.saved-posters').classList.toggle('hidden')
+  // document.querySelector(`.${event.target.getAttribute('data-section-id')}`).classList.remove('hidden')
+}
 
